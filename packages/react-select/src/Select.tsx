@@ -1149,7 +1149,7 @@ export default class Select<
     event.preventDefault();
     this.focusInput();
   };
-  onMenuMouseMove: MouseEventHandler<HTMLDivElement> = (event) => {
+  onMenuMouseMove: MouseEventHandler<HTMLDivElement> = () => {
     this.blockOptionHover = false;
   };
   onControlMouseDown = (
@@ -1846,7 +1846,7 @@ export default class Select<
     let menuUI: ReactNode;
 
     if (this.hasOptions()) {
-      menuUI = this.getCategorizedOptions().map((item) => {
+      menuUI = this.getCategorizedOptions().map((item: CategorizedGroupOrOption<Option, Group>) => {
         if (item.type === 'group') {
           const { data, options, index: groupIndex } = item;
           const groupId = `${this.getElementId('group')}-${groupIndex}`;
@@ -1873,6 +1873,7 @@ export default class Select<
         } else if (item.type === 'option') {
           return render(item, `${item.index}`);
         }
+        throw new Error(`invalid item.type`);
       });
     } else if (isLoading) {
       const message = loadingMessage({ inputValue });

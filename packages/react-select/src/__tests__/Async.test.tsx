@@ -34,7 +34,7 @@ cases(
       props: {
         defaultOptions: true,
         loadOptions: (
-          inputValue: string,
+          _: string,
           callBack: (options: readonly Option[]) => void
         ) => callBack([OPTIONS[0]]),
       },
@@ -90,7 +90,7 @@ cases(
     'with callback > should resolve the options': {
       props: {
         loadOptions: (
-          inputValue: string,
+          _: string,
           callBack: (options: readonly Option[]) => void
         ) => callBack(OPTIONS),
       },
@@ -172,7 +172,7 @@ test('to create new cache for each instance', async () => {
 test('in case of callbacks display the most recently-requested loaded options (if results are returned out of order)', () => {
   let callbacks: ((options: readonly Option[]) => void)[] = [];
   const loadOptions = (
-    inputValue: string,
+    _: string,
     callback: (options: readonly Option[]) => void
   ) => {
     callbacks.push(callback);
@@ -215,7 +215,7 @@ test('in case of callbacks display the most recently-requested loaded options (i
 // QUESTION: we currently do not do this, do we want to?
 test.skip('in case of callbacks should handle an error by setting options to an empty array', () => {
   const loadOptions = (
-    inputValue: string,
+    _: string,
     callback: (options: readonly Option[]) => void
   ) => {
     // @ts-ignore
